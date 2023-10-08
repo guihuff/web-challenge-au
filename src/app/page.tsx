@@ -1,10 +1,17 @@
 import ImageBanner from '@/assets/banner-pizza.svg'
+import { CategoryProductList } from '@/components/categoryProductList'
+import { api } from '@/services/api';
 import Image from 'next/image'
 
-export default async function Home() {
+async function getCategories() {
+  const response = await api.get('/categories');
+  return response.data;
+}
 
+export default async function Home() {
+  const categories = await getCategories();
   return (
-    <main>
+    <main className='container m-auto'>
       <section className='w-full px-3 min-h-[400px] md:h-full'>
         <div className='w-full bg-background-secundary h-full rounded-xl flex flex-col md:flex-row justify-center items-center gap-3 py-4'>
           <div className='text-color-secundary flex flex-col gap-3 items-center md:items-start px-4 lg:px-0'>
@@ -19,6 +26,11 @@ export default async function Home() {
           </div>
           <Image src={ImageBanner} alt="Imagem de Pizza" className='md:w-[400px] w-60' />
         </div>
+      </section>
+      <section className='w-full px-3 mt-3'>
+        <CategoryProductList 
+          categories={categories}
+        />
       </section>
 
     </main>
