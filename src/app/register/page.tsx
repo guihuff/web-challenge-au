@@ -21,7 +21,7 @@ export default function Register () {
         <span className="text-2xl font-medium text-color-primary">Categorias</span>
           <Image src={ImageCategory} alt="Imagem de produtos" className="w-36 h-28 absolute -right-16"/>
         </Link>
-        <Link href={""} className="relative h-32 flex items-center w-52 p-4 rounded-xl bg-button-primary transition ease-in-out text-xs hover:scale-105">
+        <Link href={"/register/menu"} className="relative h-32 flex items-center w-52 p-4 rounded-xl bg-button-primary transition ease-in-out text-xs hover:scale-105">
         <span className="text-2xl font-medium text-color-primary">Menus</span>
           <Image src={ImagemMenu} alt="Imagem de produtos" className="w-36 h-28 absolute -right-12"/>
         </Link>
