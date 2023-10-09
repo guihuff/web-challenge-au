@@ -20,9 +20,11 @@ export function Header() {
         </Link>
       </nav>
       
-      <button className='ml-auto bg-button-primary py-2 px-3 rounded-xl font-medium hover:text-color-secundary transition ease-in-out text-xs md:text-sm'>
+      <Link 
+        href={"/register"}
+        className='ml-auto bg-button-primary py-2 px-3 rounded-xl font-medium hover:text-color-secundary transition ease-in-out text-xs md:text-sm'>
         Formulários
-      </button>
+      </Link>
     </div>
   </header>
   )
