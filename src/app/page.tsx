@@ -4,6 +4,7 @@ import { api } from '@/services/api';
 import Image from 'next/image'
 
 async function getCategories() {
+  await new Promise(res => setTimeout(res, 3000))
   const response = await api.get('/categories');
   return response.data;
 }

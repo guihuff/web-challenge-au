@@ -29,3 +29,14 @@ export function Loader () {
       ></motion.div>
   )
 }
+
+export function LoaderDark () {
+  return (
+      <motion.div
+        className="rounded-full border-t-4 border-background-secundary border-solid animate-spin w-7 h-7 relative"
+        initial={{ rotate: 0 }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+      ></motion.div>
+  )
+}
