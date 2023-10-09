@@ -8,7 +8,7 @@ async function getCategories() {
   return response.data;
 }
 
-export default async function Category(){
+export default async function Product(){
   const categories = await getCategories();
 
 

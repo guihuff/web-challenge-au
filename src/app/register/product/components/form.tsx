@@ -6,6 +6,7 @@ import { CategoryProps } from "@/interfaces/category";
 import { api } from "@/services/api";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
+import { SendImage } from "./image";
 
 interface FormProps {
   categories: CategoryProps[];
@@ -18,10 +19,9 @@ export function Form({ categories }: FormProps) {
   const [priceInput, setPriceInput] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [categoryId, setCategoryId] = useState<string>('');
-
+  const [productId, setProductId] = useState('');
 
   const [loading, setLoading] = useState(false);
-
 
   const handleInputPriceInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     let sanitizedValue = e.target.value.replace(/[^0-9,]/g, '');
@@ -56,9 +56,13 @@ export function Form({ categories }: FormProps) {
             progress: undefined,
             theme: "light",
           });
+          setName("");
+          setDescription("");
+          setPriceInput("");
+          setPrice(0);
+          setCategoryId("");
+          setProductId(response.data.id)
         }
-        setName("");
-        setDescription("");
       } catch (err) {
         toast.error('Algo deu errado!', {
           position: "top-center",
@@ -108,43 +112,51 @@ export function Form({ categories }: FormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-3 px-3 py-6 shadow-lg rounded-xl">
-        <h2 className="text-xl">Formulário</h2>
-        <Input name={"Nome"} 
-          placeholder="nome do produto" 
-          type="text" 
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          isRequired
-        />
-        <Input name={"Descrição"} 
-          placeholder="descrição do produto" 
-          type="text" 
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          isRequired
-        />
-        <Input name={"Preço"} 
-          placeholder="preço do produto" 
-          type="text"
-          value={priceInput}
-          onChange={handleInputPriceInput}
-          isRequired
-        />
-        <Select 
-          value={categoryId}
-          onChange={e => setCategoryId(e.target.value)}
-          options={categories}
-          name={"Categoria"}
-          required
-        />
+        {!productId ? (
+          <form onSubmit={handleSubmit}>
+            <h2 className="text-xl">Formulário</h2>
+            <Input label={"Nome"} 
+              placeholder="nome do produto" 
+              type="text" 
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              isRequired
+            />
+            <Input label={"Descrição"} 
+              placeholder="descrição do produto" 
+              type="text" 
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              isRequired
+            />
+            <Input label={"Preço"} 
+              placeholder="preço do produto" 
+              type="text"
+              value={priceInput}
+              onChange={handleInputPriceInput}
+              isRequired
+            />
+            <Select 
+              value={categoryId}
+              onChange={e => setCategoryId(e.target.value)}
+              options={categories}
+              name={"Categoria"}
+              required
+            />
 
-        <button type="submit" 
-          className="flex justify-center items-center h-12 mt-3 py-3 px-5 rounded-xl font-bold bg-button-primary hover:text-color-secundary hover:shadow-lg transition ease-in-out">
-          {loading ? <Loader />: "Cadastrar"}
-        </button>
+            <button type="submit" 
+              className="flex w-full justify-center items-center h-12 mt-3 py-3 px-5 rounded-xl font-bold bg-button-primary hover:text-color-secundary hover:shadow-lg transition ease-in-out">
+              {loading ? <Loader />: "Cadastrar"}
+            </button>
+          </form>
+        ) :
+          <SendImage id={productId} 
+            onReturn={() => setProductId("")}
+          />
+        }
+        
+
       </div>
-    </form>
   )
 }

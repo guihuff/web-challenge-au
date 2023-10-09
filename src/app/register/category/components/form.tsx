@@ -76,14 +76,14 @@ export function Form() {
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-3 px-3 py-6 shadow-lg rounded-xl">
         <h2 className="text-xl">Formulário</h2>
-        <Input name={"Nome"} 
+        <Input label={"Nome"} 
           placeholder="nome da categoria" 
           type="text" 
           value={name}
           onChange={(e) => setName(e.target.value)}
           isRequired
         />
-        <Input name={"Descrição"} 
+        <Input label={"Descrição"} 
           placeholder="descrição da categoria" 
           type="text" 
           value={description}
