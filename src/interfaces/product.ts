@@ -1,3 +1,4 @@
+
 export interface BaseProductProps {
   id: string;
   name: string;
@@ -5,4 +6,10 @@ export interface BaseProductProps {
   price: number;
   image: string;
   imageURL: string;
+  category?: CategoryBaseProps;
+}
+
+interface CategoryBaseProps {
+  id: string;
+  name: string;
 }

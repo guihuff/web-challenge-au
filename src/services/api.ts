@@ -1,11 +1,11 @@
 import axios, { AxiosError } from 'axios';
 
+export const baseURL = 'http://localhost:3000';
 
 export function setupAPIClient (ctx = undefined) {
 
   const api = axios.create({
-    baseURL: 'http://localhost:3000',
-    // baseURL: 'http://0.0.0.0:3333',
+    baseURL,
   });
 
   return api;

@@ -4,6 +4,7 @@ import { CategoryProps } from '@/interfaces/category';
 import { api } from '@/services/api';
 import { numberInMoney } from '@/utils/numberInMoney';
 import {motion} from 'framer-motion';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -82,10 +83,12 @@ export function CategoryProductList({categories}: CategoryProductListProps) {
             categorySelected?.products.map(product => {
               return (
                 <li key={product.id} className='flex flex-col sm:flex-row justify-between items-center min-h-14 bg-white rounded-xl py-3 px-6 my-3'>
-                  <button className='flex flex-col items-center sm:items-start cursor-pointer ease-in-out duration-300 hover:scale-105'>
+                  <Link
+                    href={`/product/${product.id}`}
+                    className='flex flex-col items-center sm:items-start cursor-pointer ease-in-out duration-300 hover:scale-105'>
                     <h2 className='font-medium'>{product.name}</h2>
                     <p className='font-light'>{product.description}</p>
-                  </button>
+                  </Link>
                   <span className='block text-xl'>R$ {numberInMoney(product.price)}</span>
                 </li>
               )
