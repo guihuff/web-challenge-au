@@ -15,11 +15,11 @@ interface ImageProps {
 export function SendImage ({ id, onReturn }: ImageProps) {
   const [imageFile, setImageFile] = useState<Blob>();
   const [loading, setLoading] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<string>('');
 
   const removeImage = () => {
     setImageFile(undefined);
-    setSelectedImage(null);
+    setSelectedImage('');
   }
 
   const handleSubmit = async (e: FormEvent) => {
@@ -104,17 +104,23 @@ export function SendImage ({ id, onReturn }: ImageProps) {
   }
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files[0];
+    if (e.target.files) {
 
-    if (file) {
-      setImageFile(file);
-      const reader = new FileReader();
+      const file = e.target.files[0];
 
-      reader.onload = (e) => {
-        setSelectedImage(e.target.result);
-      };
+      if (file) {
+        setImageFile(file);
+        const reader = new FileReader();
 
-      reader.readAsDataURL(file);
+        reader.onload = (e) => {
+          if(e && e.target && e.target.result) {
+            setSelectedImage(e.target.result as string);
+          }
+          
+        };
+
+        reader.readAsDataURL(file);
+      }
     }
   };
 
