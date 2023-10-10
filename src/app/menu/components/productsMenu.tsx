@@ -17,7 +17,7 @@ export function ProductsMenu({ menu, categories }: ProductsMenuProps) {
   };
 
   useEffect(() => {
-    setSelectedCategory(categories[0].id)
+    setSelectedCategory(categories[0].id);
   }, [categories]);
 
   return (

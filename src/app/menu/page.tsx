@@ -4,8 +4,11 @@ import { MenuProps } from "@/interfaces/menu";
 
 
 async function getMenu() {
-  const response = await api.get('/menus');
-  return response.data;
+  try {
+    const response = await api.get('/menus');
+    return response.data;
+  } catch (err) {
+  }
 }
 
 async function getCategories() {
