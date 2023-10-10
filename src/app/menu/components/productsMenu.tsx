@@ -15,7 +15,6 @@ export function ProductsMenu({ menu, categories }: ProductsMenuProps) {
   const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedCategory(e.target.value);
   };
-  console.log(menu);
 
   useEffect(() => {
     setSelectedCategory(categories[0].id);
