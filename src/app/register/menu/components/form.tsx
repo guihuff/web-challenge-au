@@ -146,90 +146,90 @@ export function Form({ categories }: FormProps) {
   }
 
   return (
-      <div className='flex flex-col gap-3 px-3 py-6 shadow-lg rounded-xl'>
-          <form onSubmit={handleSubmit}>
-            <h2 className='text-xl'>Formulário</h2>
-            <Input label={'Nome'} 
-              placeholder='nome do menu' 
-              type='text' 
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              isRequired
-            />
-            <div className='flex flex-col justify-start gap-2 items-start'>
-              <span>Período *</span>
-              <label className='flex gap-3'>
-                <input 
-                  type='radio' 
-                  name='time'
-                  value='DAY'
-                  checked={time === 'DAY'}
-                  onChange={handleRadioChange}
-                />Dia
-              </label>
-              <label className='flex gap-3'>
+    <div className='flex flex-col gap-3 px-3 py-6 shadow-lg rounded-xl'>
+        <form onSubmit={handleSubmit}>
+          <h2 className='text-xl'>Formulário</h2>
+          <Input label={'Nome'} 
+            placeholder='nome do menu' 
+            type='text' 
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            isRequired
+          />
+          <div className='flex flex-col justify-start gap-2 items-start'>
+            <span>Período *</span>
+            <label className='flex gap-3'>
               <input 
                 type='radio' 
                 name='time'
-                value='NIGHT'
-                checked={time === 'NIGHT'}
+                value='DAY'
+                checked={time === 'DAY'}
                 onChange={handleRadioChange}
-              />
-              Noite
-              </label>
-            </div>
-            <Select 
-              value={categoryId}
-              onChange={e => setCategoryId(e.target.value)}
-              options={categories}
-              name={'Selecione uma categoria de produtos'}
+              />Dia
+            </label>
+            <label className='flex gap-3'>
+            <input 
+              type='radio' 
+              name='time'
+              value='NIGHT'
+              checked={time === 'NIGHT'}
+              onChange={handleRadioChange}
             />
-            <ul className='h-56 mt-3 bg-white rounded-xl py-3 px-2 flex flex-col gap-3 overflow-y-auto'>
-            {
-              categorySelected && categorySelected.products && categorySelected.products?.length > 0 ?
-                categorySelected.products.map(item => {
-                  return (
-                  <li key={item.id} className='w-full flex justify-between px-3 py-2 bg-color-secundary items-center rounded-xl'>
-                  <div className='flex flex-col'>
-                    <span className='text-xs font-bold'>{item.name}</span>
-                    <span className='text-xs'>{item.description}</span>
-                  </div>
-                  <span className='block ml-auto mr-4'>R$ {numberInMoney(item.price)}</span>
-                  <button
-                    className='w-7 h-7 rounded-xl flex items-center justify-center bg-button-primary hover:text-color-secundary hover:scale-105 transition ease-in-out'
-                    type='button'
-                    onClick={() => handleAddProduct({ id: item.id, name: item.name})}
-                  >
-                    +
-                  </button>
-                </li>
-                )})
-              :
-              !categoryId ? <li>Selecione uma categoria</li> : <li>Não há produtos nessa categoria</li>
-            }
-            </ul> 
-            <ul className='h-52 mt-3 bg-white rounded-xl py-3 px-2 flex flex-col gap-3 overflow-y-auto'>
-              <li>Produtos adicionados</li>
-              {products.map(item => {
-                  return (
-                  <li key={item.id} className='w-full flex justify-between px-3 py-2 bg-color-secundary items-center rounded-xl'>
-                  <span className='block text-xs font-bold'>{item.name}</span>
-                  <button
-                    className='w-7 h-7 rounded-xl flex items-center justify-center bg-red-400 hover:text-color-secundary hover:scale-105 transition ease-in-out'
-                    type='button'
-                    onClick={() => handleRemoveProduct(item.id)}
-                  >
-                    -
-                  </button>
-                </li>
-                )})}
-            </ul>
-            
-            <button type='submit' 
-              className='flex w-full justify-center items-center h-12 mt-3 py-3 px-5 rounded-xl font-bold bg-button-primary hover:text-color-secundary hover:shadow-lg transition ease-in-out'>
-              {loading ? <Loader />: 'Cadastrar'}
-            </button>
-          </form>
-      </div>
+            Noite
+            </label>
+          </div>
+          <Select 
+            value={categoryId}
+            onChange={e => setCategoryId(e.target.value)}
+            options={categories}
+            name={'Selecione uma categoria de produtos'}
+          />
+          <ul className='h-56 mt-3 bg-white rounded-xl py-3 px-2 flex flex-col gap-3 overflow-y-auto'>
+          {
+            categorySelected && categorySelected.products && categorySelected.products?.length > 0 ?
+              categorySelected.products.map(item => {
+                return (
+                <li key={item.id} className='w-full flex justify-between px-3 py-2 bg-color-secundary items-center rounded-xl'>
+                <div className='flex flex-col'>
+                  <span className='text-xs font-bold'>{item.name}</span>
+                  <span className='text-xs'>{item.description}</span>
+                </div>
+                <span className='block ml-auto mr-4'>R$ {numberInMoney(item.price)}</span>
+                <button
+                  className='w-7 h-7 rounded-xl flex items-center justify-center bg-button-primary hover:text-color-secundary hover:scale-105 transition ease-in-out'
+                  type='button'
+                  onClick={() => handleAddProduct({ id: item.id, name: item.name})}
+                >
+                  +
+                </button>
+              </li>
+              )})
+            :
+            !categoryId ? <li>Selecione uma categoria</li> : <li>Não há produtos nessa categoria</li>
+          }
+          </ul> 
+          <ul className='h-52 mt-3 bg-white rounded-xl py-3 px-2 flex flex-col gap-3 overflow-y-auto'>
+            <li>Produtos adicionados</li>
+            {products.map(item => {
+                return (
+                <li key={item.id} className='w-full flex justify-between px-3 py-2 bg-color-secundary items-center rounded-xl'>
+                <span className='block text-xs font-bold'>{item.name}</span>
+                <button
+                  className='w-7 h-7 rounded-xl flex items-center justify-center bg-red-400 hover:text-color-secundary hover:scale-105 transition ease-in-out'
+                  type='button'
+                  onClick={() => handleRemoveProduct(item.id)}
+                >
+                  -
+                </button>
+              </li>
+              )})}
+          </ul>
+          
+          <button type='submit' 
+            className='flex w-full justify-center items-center h-12 mt-3 py-3 px-5 rounded-xl font-bold bg-button-primary hover:text-color-secundary hover:shadow-lg transition ease-in-out'>
+            {loading ? <Loader />: 'Cadastrar'}
+          </button>
+        </form>
+    </div>
   )
 }
