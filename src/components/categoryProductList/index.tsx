@@ -6,7 +6,7 @@ import { numberInMoney } from '@/utils/numberInMoney';
 import {motion} from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 interface CategoryProductListProps {
   categories: CategoryProps[];
